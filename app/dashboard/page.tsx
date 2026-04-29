@@ -5,7 +5,8 @@ import { useGetStatsQuery, useGetTasksQuery } from "@/redux/services/task-api";
 export default function DashboardPage() {
   const { data: response, error, isLoading, isFetching } = useGetTasksQuery({
     page: 1,
-    pageSize: 10
+    pageSize: 10,
+    priority: "HIGH"
   });
   const { data: statsResponse } = useGetStatsQuery(null);
 
