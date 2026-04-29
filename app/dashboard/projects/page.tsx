@@ -1,7 +1,10 @@
 "use client"
+import { useState } from 'react';
 import { ProjectFormModal, ProjectItem } from '@/components'
+import { Project } from '@/redux/services/interfaces/projects/Project-response';
 import { useGetProjectsQuery } from '@/redux/services/project-api'
 export default function ProjectsPage() {
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const { data: response, isLoading, isFetching, error } = useGetProjectsQuery(null);
   if (isLoading || isFetching) return <p>Loading...</p>;
   if (error) return <p>some error</p>;
@@ -10,7 +13,7 @@ export default function ProjectsPage() {
       <div className='flex justify-between'>
         <p className='text-zinc-500'>Manage your projects and track progress</p>
         <button className="btn btn-primary" onClick={() => {
-          const modal = document.getElementById('my_project_from_modal') as HTMLDialogElement | null;
+          const modal = document.getElementById('my_project_form_modal') as HTMLDialogElement | null;
           modal?.showModal();
         }}>
           <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24">
@@ -21,10 +24,10 @@ export default function ProjectsPage() {
       </div>
       <div className='grid grid-cols-1 lg:grid-cols-2 gap-6'>
         {
-          response?.data.map((item) => <ProjectItem key={item.id} project={item} />)
+          response?.data.map((item) => <ProjectItem key={item.id} project={item} setSelectedProject={setSelectedProject} />)
         }
       </div>
-      <ProjectFormModal />
+      <ProjectFormModal project={selectedProject} />
 
     </div>
   )
