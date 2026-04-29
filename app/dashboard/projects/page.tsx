@@ -1,5 +1,5 @@
 "use client"
-import { ProjectItem } from '@/components'
+import { ProjectFormModal, ProjectItem } from '@/components'
 import { useGetProjectsQuery } from '@/redux/services/project-api'
 export default function ProjectsPage() {
   const { data: response, isLoading, isFetching, error } = useGetProjectsQuery(null);
@@ -9,7 +9,10 @@ export default function ProjectsPage() {
     <div className='lg:w-[88%] flex flex-col gap-6'>
       <div className='flex justify-between'>
         <p className='text-zinc-500'>Manage your projects and track progress</p>
-        <button className="btn btn-primary">
+        <button className="btn btn-primary" onClick={() => {
+          const modal = document.getElementById('my_project_from_modal') as HTMLDialogElement | null;
+          modal?.showModal();
+        }}>
           <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24">
             <path fill="currentColor" d="M11 13H5v-2h6V5h2v6h6v2h-6v6h-2z"></path>
           </svg>
@@ -21,6 +24,7 @@ export default function ProjectsPage() {
           response?.data.map((item) => <ProjectItem key={item.id} project={item} />)
         }
       </div>
+      <ProjectFormModal />
 
     </div>
   )
