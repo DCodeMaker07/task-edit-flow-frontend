@@ -1,6 +1,11 @@
+"use client"
 import { ProjectItem } from '@/components'
-import { mockProjects } from '@/utils/projects'
+import { useGetProjectsQuery } from '@/redux/services/project-api'
 export default function ProjectsPage() {
+  const { data: response, isLoading, isFetching, error } = useGetProjectsQuery(null);
+  if (isLoading || isFetching) return <p>Loading...</p>;
+  if (error) return <p>some error</p>;
+  console.log(response);
   return (
     <div className='lg:w-[88%] flex flex-col gap-6'>
       <div className='flex justify-between'>
@@ -14,7 +19,7 @@ export default function ProjectsPage() {
       </div>
       <div className='grid grid-cols-1 lg:grid-cols-2 gap-6'>
         {
-          mockProjects.map((item) => <ProjectItem key={item.id} project={item} />)
+          response?.data.map((item) => <ProjectItem key={item.id} project={item} />)
         }
       </div>
 
