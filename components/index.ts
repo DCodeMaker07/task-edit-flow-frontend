@@ -10,3 +10,5 @@ export * from './projects/ProjectFormModal';
 
 export * from './tasks/TaskFilters';
 export * from './tasks/TaskTable';
+export * from './tasks/TaskFormModal';
+export * from './tasks/TaskPagination';
