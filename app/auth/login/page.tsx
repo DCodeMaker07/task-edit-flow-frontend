@@ -3,35 +3,36 @@
 import { useRouter } from "next/navigation";
 import { useFormik } from "formik";
 import { useAppDispatch } from "@/redux/hooks";
-import { loginSuccess } from "@/redux/slices/authSlice";
-import { loginRequest } from "@/lib/auth.api";
 import { loginSchema } from "@/lib/validations/auth.schema";
+import { useLoginMutation } from "@/redux/services/auth-api";
+import { setUser } from "@/redux/slices/authSlice";
+import { toast } from "react-toastify";
 
 export default function LoginPage() {
 
+    const [login, { isLoading }] = useLoginMutation();
     const dispatch = useAppDispatch();
     const router = useRouter();
 
     const formik = useFormik({
         initialValues: {
-            email: '',
-            password: '',
+            email: "",
+            password: "",
         },
         validationSchema: loginSchema,
-
-        onSubmit: async (values, { setSubmitting, setStatus }) => {
+        onSubmit: async (values, { setStatus }) => {
             try {
-                setStatus(null);
+                const res = await login(values).unwrap();
 
-                const res = await loginRequest(values);
+                localStorage.setItem("token", res.data.access_token);
 
-                dispatch(loginSuccess(res.data));
+                dispatch(setUser(res.data));
 
-                router.push('/dashboard');
-            } catch (err: any) {
-                setStatus(err.response?.data?.message || 'Error al iniciar sesión');
-            } finally {
-                setSubmitting(false);
+                router.push("/dashboard");
+
+            } catch (error: any) {
+                setStatus(error.data.message || "Something went wrong")
+                toast.error(error.data.message);
             }
         },
     });
@@ -86,9 +87,9 @@ export default function LoginPage() {
                         <button
                             type="submit"
                             className="btn btn-neutral"
-                            disabled={formik.isSubmitting}
+                            disabled={isLoading}
                         >
-                            {formik.isSubmitting ? (
+                            {isLoading ? (
                                 <span className="loading loading-spinner text-primary"></span>
                             ) : 'Iniciar Sesión'}
                         </button>
