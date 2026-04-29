@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { Project } from '@/redux/services/interfaces/projects/Project-response';
 import { useDeleteProjectMutation } from '@/redux/services/project-api';
 import { getProjectProgress } from '@/utils/getProgress';
@@ -42,6 +43,9 @@ export const ProjectItem = ({ project, setSelectedProject }: Props) => {
                         <button type='button' className='btn bg-secondary w-8 h-8 text-zinc-50' onClick={handleDelete}>
                             X
                         </button>
+                        <Link href={`/dashboard/projects/${project.id}/tasks`} type='button' className='btn bg-success-content w-8 h-8 text-zinc-50'>
+                            👁️
+                        </Link>
 
                     </div>
                 </div>
