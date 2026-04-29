@@ -31,15 +31,20 @@ const menuItems = [
 export const Sidebar = () => {
   const pathname = usePathname();
   const user = useAppSelector(state => state.auth.user);
+
   return (
-    <div className='w-[12%] bg-zinc-50 rounded-md shadow p-4'>
-      <div className='flex flex-col justify-between h-full'>
-        <div>
+    <div className='w-full lg:w-[12%] h-auto lg:h-full bg-zinc-50 rounded-md shadow p-4 overflow-x-auto lg:overflow-visible'>
+      
+      {/* CONTENEDOR PRINCIPAL */}
+      <div className='flex flex-row lg:flex-col justify-between h-auto lg:h-full whitespace-nowrap'>
+
+        {/* IZQUIERDA */}
+        <div className="flex-shrink-0">
           <div className='mt-2 mb-8'>
             <p className='text-2xl font-bold tracking-wider'>TaskFlow</p>
           </div>
 
-          <div className="flex lg:flex-col gap-4">
+          <div className="flex lg:flex-col gap-4 flex-nowrap">
             {menuItems.map((item) => {
               const isActive = pathname === item.path;
 
@@ -47,20 +52,32 @@ export const Sidebar = () => {
                 <Link
                   key={item.path}
                   href={item.path}
-                  className={`flex gap-2 group cursor-pointer rounded-md transition-all duration-500 ${isActive ? 'bg-neutral py-2 pl-2' : 'hover:bg-neutral hover:py-2 hover:pl-2'} `}
+                  className={`flex items-center gap-2 px-3 py-2 group cursor-pointer rounded-md transition-all duration-300 ${
+                    isActive
+                      ? 'bg-neutral text-zinc-50'
+                      : 'text-zinc-700 hover:bg-neutral hover:text-zinc-50'
+                  }`}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width={24}
                     height={24}
                     viewBox="0 0 24 24"
-                    className={`transition-all ${isActive ? 'text-zinc-50' : 'text-zinc-700 group-hover:text-zinc-50'}`}
+                    className={`transition-all ${
+                      isActive
+                        ? 'text-zinc-50'
+                        : 'text-zinc-700 group-hover:text-zinc-50'
+                    }`}
                   >
                     <g fill="currentColor">{item.icon}</g>
                   </svg>
 
                   <p
-                    className={`tracking-wider transition-all ${isActive ? 'text-zinc-50' : 'text-zinc-700 group-hover:text-zinc-50'}`}
+                    className={`tracking-wider transition-all ${
+                      isActive
+                        ? 'text-zinc-50'
+                        : 'text-zinc-700 group-hover:text-zinc-50'
+                    }`}
                   >
                     {item.label}
                   </p>
@@ -68,10 +85,10 @@ export const Sidebar = () => {
               );
             })}
           </div>
-
         </div>
 
-        <div>
+        {/* DERECHA */}
+        <div className="flex-shrink-0">
           <div>
             <div className='flex flex-row w-full h-full items-center gap-2 bg-zinc-200 rounded-lg p-2'>
               <Image
@@ -87,7 +104,9 @@ export const Sidebar = () => {
               </div>
             </div>
           </div>
+
           <div className="divider"></div>
+
           <div className='flex gap-2 group transition-all ease-in-out duration-500 cursor-pointer hover:bg-neutral rounded-md hover:py-2 hover:pl-2'>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -101,7 +120,9 @@ export const Sidebar = () => {
                 d="M5 21q-.825 0-1.412-.587T3 19V5q0-.825.588-1.412T5 3h7v2H5v14h7v2zm11-4l-1.375-1.45l2.55-2.55H9v-2h8.175l-2.55-2.55L16 7l5 5z"
               />
             </svg>
-            <p className='tracking-wider transition-all text-zinc-700 group-hover:text-zinc-50'>Logout</p>
+            <p className='tracking-wider transition-all text-zinc-700 group-hover:text-zinc-50'>
+              Logout
+            </p>
           </div>
         </div>
 
