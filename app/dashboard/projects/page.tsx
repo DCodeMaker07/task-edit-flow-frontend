@@ -5,7 +5,6 @@ export default function ProjectsPage() {
   const { data: response, isLoading, isFetching, error } = useGetProjectsQuery(null);
   if (isLoading || isFetching) return <p>Loading...</p>;
   if (error) return <p>some error</p>;
-  console.log(response);
   return (
     <div className='lg:w-[88%] flex flex-col gap-6'>
       <div className='flex justify-between'>
