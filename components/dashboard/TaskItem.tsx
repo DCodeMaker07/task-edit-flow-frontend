@@ -1,4 +1,4 @@
-import { Task } from "@/utils/tasks"
+import { Task } from "@/redux/services/interfaces/tasks/Task-response";
 
 type Props = {
   task: Task
@@ -14,7 +14,7 @@ export const TaskItem = ({ task }: Props) => {
     <div>
       <p className="text-zinc-700">{task.title}</p>
       <div className="flex flex-row justify-between">
-        <p className="text-zinc-400 text-xs">Due: {task.dueDate?.toLocaleDateString()}</p>
+        <p className="text-zinc-400 text-xs">Due: {new Date(task.dueDate).toLocaleDateString()}</p>
         <p className={`lowercase text-md px-2 py-1 rounded-md ${priorityStyles[task.priority]}`}>{task.priority}</p>
       </div>
     </div>
