@@ -8,7 +8,7 @@ export const taskApi = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: 'http://localhost:3001/api/v1',
         prepareHeaders: (headers) => {
-            const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjbW9ocHQ5aXgwMDAwMndlcHh6MDlhNDV6IiwiZW1haWwiOiJwbUB0YXNrZmxvdy5jb20iLCJyb2xlIjoiUFJPSkVDVF9NQU5BR0VSIiwiaWF0IjoxNzc3NDg5MDE4LCJleHAiOjE3Nzc0OTI2MTh9.a_JaOnpe9tR9h_YsdT1vgvAmD_5HN_WfT3Znwe1rKtM";
+            const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjbW9ocHQ5ajEwMDAxMndlcHhvZzJxZDZ5IiwiZW1haWwiOiJhZG1pbkB0YXNrZmxvdy5jb20iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3Nzc0OTQ0NDAsImV4cCI6MTc3NzQ5ODA0MH0.YSPk2Kvj1t-e-urdqfe34n0UMQEmVYfIX6xRO9k6buU";
 
             if (token) {
                 headers.set('Authorization', `Bearer ${token}`)
@@ -27,7 +27,7 @@ export const taskApi = createApi({
 
         getStats: builder.query<TaskStatsResponse, null>({
             query: () => 'tasks/stats'
-        })
+        }),
     })
 });
 
