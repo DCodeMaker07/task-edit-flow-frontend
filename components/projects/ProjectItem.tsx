@@ -1,5 +1,6 @@
+import { Project } from '@/redux/services/interfaces/projects/Project-response';
 import { getProjectProgress } from '@/utils/getProgress';
-import { Project } from '@/utils/projects'
+
 type Props = {
     project: Project
 }
