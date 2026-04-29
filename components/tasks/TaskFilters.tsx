@@ -24,11 +24,11 @@ export const TaskFilters = ({ status, priority, setStatus, setPriority }: Props)
           <legend className="fieldset-legend">Priority</legend>
           <select className="select" value={priority} onChange={(e) => setPriority(e.target.value)}>
             <option disabled={true}>Pick a priority</option>
-            <option>All Priority</option>
-            <option>Low</option>
-            <option>Medium</option>
-            <option>High</option>
-            <option>Critical</option>
+            <option value={""}>All Priority</option>
+            <option value={"LOW"}>Low</option>
+            <option value={"MEDIUM"}>Medium</option>
+            <option value={"HIGH"}>High</option>
+            <option value={"CRITICAL"}>Critical</option>
           </select>
 
         </fieldset>
