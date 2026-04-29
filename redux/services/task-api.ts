@@ -8,7 +8,7 @@ export const taskApi = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: 'http://localhost:3001/api/v1',
         prepareHeaders: (headers) => {
-            const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjbW9ocHQ5ajEwMDAxMndlcHhvZzJxZDZ5IiwiZW1haWwiOiJhZG1pbkB0YXNrZmxvdy5jb20iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3Nzc0OTQ0NDAsImV4cCI6MTc3NzQ5ODA0MH0.YSPk2Kvj1t-e-urdqfe34n0UMQEmVYfIX6xRO9k6buU";
+            const token = localStorage.getItem("token");
 
             if (token) {
                 headers.set('Authorization', `Bearer ${token}`)
@@ -17,18 +17,45 @@ export const taskApi = createApi({
             return headers;
         }
     }),
+    tagTypes: ['Tasks'],
     endpoints: (builder) => ({
         getTasks: builder.query<TaskResponse, TaskFilters>({
             query: (filters) => ({
                 url: 'tasks',
                 params: filters,
             }),
+            providesTags: ['Tasks'],
         }),
 
         getStats: builder.query<TaskStatsResponse, null>({
-            query: () => 'tasks/stats'
+            query: () => 'tasks/stats',
+        }),
+        createTask: builder.mutation({
+            query: (body) => ({
+                url: 'tasks',
+                method: 'POST',
+                body,
+            }),
+            invalidatesTags: ['Tasks'],
+        }),
+
+        updateTask: builder.mutation({
+            query: ({ id, ...body }) => ({
+                url: `tasks/${id}`,
+                method: 'PATCH',
+                body,
+            }),
+            invalidatesTags: ['Tasks'],
+        }),
+
+        deleteTask: builder.mutation({
+            query: (id) => ({
+                url: `tasks/${id}`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: ['Tasks'],
         }),
     })
 });
 
-export const { useGetTasksQuery, useGetStatsQuery } = taskApi;
+export const { useGetTasksQuery, useGetStatsQuery, useCreateTaskMutation, useUpdateTaskMutation, useDeleteTaskMutation } = taskApi;
