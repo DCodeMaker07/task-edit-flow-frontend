@@ -12,3 +12,8 @@ export * from './tasks/TaskFilters';
 export * from './tasks/TaskTable';
 export * from './tasks/TaskFormModal';
 export * from './tasks/TaskPagination';
+
+export * from './users/UserFilters';
+export * from './users/UserTable';
+export * from './users/UserFormModal';
+export * from './users/UserPagination';
