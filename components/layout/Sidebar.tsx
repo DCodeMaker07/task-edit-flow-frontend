@@ -20,19 +20,19 @@ const menuItems = [
       <path d="M16 12v-2h2v2zm0 2h-2v-2h2zm0 2v-2h2v2zm-4.825-8l-2-2H4v12h10v-2h2v2h4V8h-4v2h-2V8zM2 20V4h8l2 2h10v14zm2-2V6z" />
     ),
   },
-  // {
-  //   label: 'Tasks',
-  //   path: '/dashboard/tasks',
-  //   icon: (
-  //     <path d="M5.55 19L2 15.45l1.4-1.4l2.125 2.125l4.25-4.25l1.4 1.425zm0-8L2 7.45l1.4-1.4l2.125 2.125l4.25-4.25l1.4 1.425zM13 17v-2h9v2zm0-8V7h9v2z" />
-  //   ),
-  // },
+  {
+    label: 'Users',
+    path: '/dashboard/users',
+    icon: (
+      <path d="M12.3 12.22A4.92 4.92 0 0 0 14 8.5a5 5 0 0 0-10 0a4.92 4.92 0 0 0 1.7 3.72A8 8 0 0 0 1 19.5a1 1 0 0 0 2 0a6 6 0 0 1 12 0a1 1 0 0 0 2 0a8 8 0 0 0-4.7-7.28M9 11.5a3 3 0 1 1 3-3a3 3 0 0 1-3 3m9.74.32A5 5 0 0 0 15 3.5a1 1 0 0 0 0 2a3 3 0 0 1 3 3a3 3 0 0 1-1.5 2.59a1 1 0 0 0-.5.84a1 1 0 0 0 .45.86l.39.26l.13.07a7 7 0 0 1 4 6.38a1 1 0 0 0 2 0a9 9 0 0 0-4.23-7.68"></path>
+    ),
+  },
 ];
 
 export const Sidebar = () => {
   const pathname = usePathname();
   const user = useAppSelector(state => state.auth.user);
-  
+
   const dispatch = useAppDispatch();
   const router = useRouter();
 
@@ -63,8 +63,8 @@ export const Sidebar = () => {
                   key={item.path}
                   href={item.path}
                   className={`flex items-center gap-2 px-3 py-2 group cursor-pointer rounded-md transition-all duration-300 ${isActive
-                      ? 'bg-neutral text-zinc-50'
-                      : 'text-zinc-700 hover:bg-neutral hover:text-zinc-50'
+                    ? 'bg-neutral text-zinc-50'
+                    : 'text-zinc-700 hover:bg-neutral hover:text-zinc-50'
                     }`}
                 >
                   <svg
@@ -73,8 +73,8 @@ export const Sidebar = () => {
                     height={24}
                     viewBox="0 0 24 24"
                     className={`transition-all ${isActive
-                        ? 'text-zinc-50'
-                        : 'text-zinc-700 group-hover:text-zinc-50'
+                      ? 'text-zinc-50'
+                      : 'text-zinc-700 group-hover:text-zinc-50'
                       }`}
                   >
                     <g fill="currentColor">{item.icon}</g>
@@ -82,8 +82,8 @@ export const Sidebar = () => {
 
                   <p
                     className={`tracking-wider transition-all ${isActive
-                        ? 'text-zinc-50'
-                        : 'text-zinc-700 group-hover:text-zinc-50'
+                      ? 'text-zinc-50'
+                      : 'text-zinc-700 group-hover:text-zinc-50'
                       }`}
                   >
                     {item.label}
