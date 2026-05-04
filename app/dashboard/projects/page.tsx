@@ -27,7 +27,7 @@ export default function ProjectsPage() {
           response?.data.map((item) => <ProjectItem key={item.id} project={item} setSelectedProject={setSelectedProject} />)
         }
       </div>
-      <ProjectFormModal project={selectedProject} />
+      <ProjectFormModal project={selectedProject} onClose={() => setSelectedProject(null)} />
 
     </div>
   )

@@ -12,9 +12,10 @@ import { Project } from "@/redux/services/interfaces/projects/Project-response";
 
 type Props = {
   project?: Project | null;
+  onClose?: () => void;
 };
 
-export const ProjectFormModal = ({ project }: Props) => {
+export const ProjectFormModal = ({ project, onClose }: Props) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
 
   const [createProject, { isLoading: creating }] = useCreateProjectMutation();
@@ -114,7 +115,10 @@ export const ProjectFormModal = ({ project }: Props) => {
               <button
                 type="button"
                 className="btn"
-                onClick={() => dialogRef.current?.close()}
+                onClick={() => {
+                  dialogRef.current?.close();
+                  onClose?.();
+                }}
               >
                 Cancel
               </button>
