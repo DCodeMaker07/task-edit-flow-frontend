@@ -13,9 +13,10 @@ import { useAppSelector } from "@/redux/hooks";
 type Props = {
   task?: Task;
   projectId?: string;
+  onClose?: () => void;
 };
 
-export const TaskFormModal = ({ task, projectId }: Props) => {
+export const TaskFormModal = ({ task, projectId, onClose }: Props) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
 
   const user = useAppSelector(state => state.auth.user);
@@ -124,7 +125,10 @@ export const TaskFormModal = ({ task, projectId }: Props) => {
               <button
                 type="button"
                 className="btn"
-                onClick={() => dialogRef.current?.close()}
+                onClick={() => {
+                  dialogRef.current?.close();
+                  onClose?.();
+                }}
               >
                 Cancel
               </button>

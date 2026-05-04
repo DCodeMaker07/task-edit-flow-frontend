@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 
 export default function TasksPage() {
 
-  const [selectedTask, setSelectedTask] = useState<Task | null>();
+  const [selectedTask, setSelectedTask] = useState<Task | null>(null);
 
   const [page, setPage] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(10);
@@ -55,7 +55,7 @@ export default function TasksPage() {
 
       <TaskPagination page={page} pages={pages} setPage={setPage} pageSize={pageSize} setPageSize={setPageSize} />
 
-      <TaskFormModal task={selectedTask || undefined} projectId={params.id as string} />
+      <TaskFormModal task={selectedTask || undefined} projectId={params.id as string} onClose={() => setSelectedTask(null)} />
 
     </div>
   )

@@ -11,7 +11,7 @@ import { format } from 'date-fns';
 
 type Props = {
   tasks: Task[],
-  setSelectedTask: React.Dispatch<React.SetStateAction<Task | null | undefined>>
+  setSelectedTask: React.Dispatch<React.SetStateAction<Task | null>>
 }
 
 export const TaskTable = ({ tasks, setSelectedTask }: Props) => {
@@ -21,11 +21,11 @@ export const TaskTable = ({ tasks, setSelectedTask }: Props) => {
     await deleteTask(taskId);
   }
 
-    const handleEdit = async (task: Task) => {
-        setSelectedTask(task);
-        const modal = document.getElementById('my_task_form_modal') as HTMLDialogElement | null;
-        modal?.showModal();
-    }
+  const handleEdit = async (task: Task) => {
+    setSelectedTask(task);
+    const modal = document.getElementById('my_task_form_modal') as HTMLDialogElement | null;
+    modal?.showModal();
+  }
 
   const columns: ColumnDef<Task>[] = [
     {
